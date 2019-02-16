@@ -1,8 +1,10 @@
 import pika
 from time import sleep
 
+sleep(10.0)
+
 connection = pika.BlockingConnection(
-  pika.URLParameters("amqp://guest:guest@localhost:32769")
+  pika.URLParameters("amqp://queue:5672")
 )
 channel = connection.channel()
 channel.queue_declare(queue='hello')

@@ -1,15 +1,23 @@
+version: '3'
+
 services:
-  consumer:
-    build: consumer/
-
-  producer:
-    build: producer/
-
   queue:
     image: rabbitmq:3.7.9
 
   database:
     image: postgres:11.2
     environment:
-      POSTGRES_USER: admin
+      POSTGRES_USER: exdb
       POSTGRES_PASSWORD: exceptional71
+      POSTGRES_DB: exdb
+
+  consumer:
+    build: consumer/
+    depends_on:
+     - "queue"
+     - "database"
+
+  producer:
+    build: producer/
+    depends_on:
+     - "queue"
