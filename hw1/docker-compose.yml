@@ -1,0 +1,15 @@
+services:
+  consumer:
+    build: consumer/
+
+  producer:
+    build: producer/
+
+  queue:
+    image: rabbitmq:3.7.9
+
+  database:
+    image: postgres:11.2
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: exceptional71
