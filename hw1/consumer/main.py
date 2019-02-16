@@ -30,9 +30,10 @@ dbconn.commit()
 k = 0
 def callback(ch, method, properties, body):
   data = body.decode()
-  cursor.execute("INSERT INTO extable (message) VALUES (%s)", (data))
-  dbconn.commit()
   print(datetime.datetime.now(), data)
+  cursor.execute("INSERT INTO extable (message) VALUES ('%s')" % (data))
+  dbconn.commit()
+
   global k
   k += 1
   if k % 10 == 0:
